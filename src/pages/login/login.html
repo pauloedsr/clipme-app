@@ -4,14 +4,14 @@
       <ion-list>
         <ion-item>
           <ion-label floating>Usuário</ion-label>
-          <ion-input></ion-input>
-        </ion-item>  
+          <ion-input [(ngModel)]="login.email"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-label floating>Senha</ion-label>
-          <ion-input></ion-input>
+          <ion-input [(ngModel)]="login.password"></ion-input>
         </ion-item>
         <ion-item text-center>
-          <button ion-button>Acessar</button>
+          <button ion-button (click)="acessar()">Acessar</button>
         </ion-item>
       </ion-list>
     </ion-card-content>
