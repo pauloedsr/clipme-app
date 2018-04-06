@@ -16,13 +16,12 @@ export class MyApp {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-      storage.get('token').then((token) => {
-        if(token && token != undefined){
-          this.rootPage = HomePage;
-        } else {
-          this.rootPage = LoginPage;
-        }
-      })
+      let token = localStorage.getItem('token');
+      if(token && token != undefined){
+        this.rootPage = HomePage;
+      } else {
+        this.rootPage = LoginPage;
+      }
     });
   }
 }

@@ -29,11 +29,11 @@ export class LoginPage {
   }
 
   acessar() {
-    this.authProvider.login(this.login).subscribe((error) => {
-      if(!error){
+    this.authProvider.login(this.login).subscribe((res : any) => {
+      if(res && res.success){
         this.navCtrl.push(HomePage);
       } else {
-        console.log(error);
+        console.log('LoginPage', res);
       }
     });
   }

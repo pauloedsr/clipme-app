@@ -10,7 +10,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthProvider {
 
-  constructor(private readonly http: Http, private trataErro: TrataErroProvider, private storage: Storage) {}
+  token: string = undefined;
+  constructor(private readonly http: Http, private trataErro: TrataErroProvider) {}
 
   public login(login: Login): Observable<Object> {
     console.log(login);
@@ -20,10 +21,10 @@ export class AuthProvider {
       .map(res => res.text())
       .map(res => {
         let json = JSON.parse(res);
-        console.log('LOGIN',json);
-        this.storage.set('token', json.token).then(()=> {
-          return res;
-        })
+        this.token = json.token;
+        localStorage.setItem('token', this.token);
+        localStorage.setItem('autor', json.user._id);
+        return json;
       }).catch((err) => {
         return this.trataErro.trata(err);
       });
