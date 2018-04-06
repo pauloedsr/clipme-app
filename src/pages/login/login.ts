@@ -1,3 +1,4 @@
+import { HomePage } from './../home/home';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Login } from './../../types/login.type';
 import { Component } from '@angular/core';
@@ -28,8 +29,12 @@ export class LoginPage {
   }
 
   acessar() {
-    this.authProvider.login(this.login).subscribe(() => {
-
+    this.authProvider.login(this.login).subscribe((error) => {
+      if(!error){
+        this.navCtrl.push(HomePage);
+      } else {
+        console.log(error);
+      }
     });
   }
 
