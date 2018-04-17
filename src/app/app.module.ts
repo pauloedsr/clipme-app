@@ -1,6 +1,6 @@
+import { TimelinePageModule } from './../pages/timeline/timeline.module';
 import { SERVER_URL } from './../config';
 import { AlertService } from './../providers/utils/alert-service';
-import { Http, HttpModule } from '@angular/http';
 import { LoginPage } from './../pages/login/login';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -16,6 +16,7 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { ClipmeServiceProvider } from '../providers/clipme-service/clipme-service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { TimelinePage } from '../pages/timeline/timeline';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -31,7 +32,6 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule,
     IonicStorageModule.forRoot({
       name: 'clipme',
       driverOrder: ['indexeddb']
@@ -39,15 +39,18 @@ export function tokenGetter() {
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNWFjMjQ2OTcxYmJiMmU1Mjk0ZmJkMTA2IiwiaWF0IjoxNTIyODYxMDk5fQ.TF4F-GDk7YTgVAOkvyKBQ0tD0tmqpnRhxpCRTM5I8z4"}
+        tokenGetter: tokenGetter,
+        whitelistedDomains: [ /^null$/ ]
       }
-    })
+    }),
+    TimelinePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    TimelinePage
   ],
   providers: [
     StatusBar,

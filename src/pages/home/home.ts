@@ -2,6 +2,7 @@ import { ClipmeServiceProvider } from './../../providers/clipme-service/clipme-s
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { TimelineModel } from '../../types/clipme.type';
+import { TimelinePage } from '../timeline/timeline';
 
 @Component({
   selector: 'page-home',
@@ -9,17 +10,22 @@ import { TimelineModel } from '../../types/clipme.type';
 })
 export class HomePage {
 
-  timelines: any;
+  timelines: TimelineModel[];
 
   constructor(public navCtrl: NavController, private clipmeService: ClipmeServiceProvider) {
 
   }
 
   ionViewDidLoad(){
-    this.clipmeService.timelineList(localStorage.getItem('autor')).subscribe((data) => {
+    this.clipmeService.timelineList(localStorage.getItem('autor'))
+    .subscribe((data) => {
       this.timelines = data;
       console.log(data);
     }, error => console.log(error));
+  }
+
+  goToTimeline(timeline: TimelineModel) {
+    this.navCtrl.push(TimelinePage, {timeline: timeline});
   }
 
 }

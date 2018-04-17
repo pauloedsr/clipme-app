@@ -1,4 +1,4 @@
-import { TimelineModel } from './../../types/clipme.type';
+import { TimelineModel, ViewTimeline, ClipModel } from './../../types/clipme.type';
 import { Observable } from 'rxjs';
 import { SERVER_URL } from './../../config';
 import { AuthProvider } from './../auth/auth';
@@ -14,10 +14,21 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ClipmeServiceProvider {
 
-  constructor(public http: HttpClient, private authProvider: AuthProvider) {}
+  constructor(private http: HttpClient, private authProvider: AuthProvider) {}
 
   public timelineList(autor: string) : Observable<any> {
       return this.http.get(`${SERVER_URL}/timeline/list/${autor}`);
+  }
+  public timelineView(id: string) : Observable<any> {
+      return this.http.get(`${SERVER_URL}/timeline/view/${id}`)
+  }
+
+  public clipme(clip: string, timelineId: string): Observable<Object> {
+    let clipme = new ClipModel();
+    clipme.timeline = timelineId;
+    clipme.autor = localStorage.getItem('autor');
+    clipme.clip = btoa(clip);
+    return this.http.post(`${SERVER_URL}/clipme`, clipme);
   }
 
 }

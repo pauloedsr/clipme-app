@@ -7,8 +7,10 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card *ngFor="let timeline of timelines">
+    <ion-card-header>
+      {{timeline.nome}}
+    </ion-card-header>
+    <button ion-button (click)="goToTimeline(timeline)" >Ir</button>
+  </ion-card>
 </ion-content>
