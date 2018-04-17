@@ -19,19 +19,19 @@ page-timeline {
   }
 
   [box-date] {
-    margin-left: $size;
+    margin-left: $size - 5;
     font-size: small;
     color: rgb(9,25,163);
     display: table;
   }
 
   [box-date] ion-icon {
-    font-size: 3rem;
+    font-size: 3.2rem;
   }
 
   [box-date] ion-icon, [box-date] div {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: top;
   }
 
   [box-date] div {
@@ -41,7 +41,6 @@ page-timeline {
   .card-md {
     border: rgba(9,25,163,0.1) 1px dashed;
     margin-bottom: 3rem;
-    margin-top: 0.2rem;
-    z-index: 3000;
+    margin-top: -1.2rem;
   }
 }
