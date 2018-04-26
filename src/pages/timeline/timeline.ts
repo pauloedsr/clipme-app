@@ -38,7 +38,8 @@ export class TimelinePage {
 
   decodeClip(clip: string){
     try {
-      return decodeURIComponent(encodeURIComponent(atob(clip)));
+      //return decodeURIComponent(encodeURIComponent(atob(clip)));
+      return (clip);
     } catch (error) {
       console.log('clip', clip);
       return 'failed';

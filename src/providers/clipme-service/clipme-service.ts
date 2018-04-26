@@ -27,7 +27,7 @@ export class ClipmeServiceProvider {
     let clipme = new ClipModel();
     clipme.timeline = timelineId;
     clipme.autor = localStorage.getItem('autor');
-    clipme.clip = btoa(clip);
+    clipme.clip = (clip);
     return this.http.post(`${SERVER_URL}/clipme`, clipme);
   }
 
